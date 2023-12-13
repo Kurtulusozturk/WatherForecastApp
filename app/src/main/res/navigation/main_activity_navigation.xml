@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainPageFragment"
-        android:name="com.example.watherforecast.view.MainPageFragment"
+        android:name="com.example.weatherforecast.view.MainPageFragment"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseLocationFragment"
-        android:name="com.example.watherforecast.view.ChooseLocationFragment"
+        android:name="com.example.weatherforecast.view.ChooseLocationFragment"
         android:label="fragment_choose_location"
         tools:layout="@layout/fragment_choose_location" />
 </navigation>

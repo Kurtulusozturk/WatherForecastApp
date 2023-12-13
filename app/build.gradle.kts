@@ -3,14 +3,15 @@ import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.example.watherforecast"
+    namespace = "com.example.weatherforecast"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.watherforecast"
+        applicationId = "com.example.weatherforecast"
         minSdk = 24
         targetSdk = 32
         versionCode = 1
@@ -35,14 +36,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
+    buildFeatures{
         viewBinding = true
+        dataBinding = true
     }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -65,4 +67,11 @@ dependencies {
     //navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+
+    //Databinding
+    //kapt("")
+    //implementation("com.android.databinding:compiler:3.1.4")
+}
+kapt {
+    correctErrorTypes = true
 }
