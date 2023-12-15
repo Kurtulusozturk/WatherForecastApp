@@ -11,12 +11,31 @@
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page" >
         <action
-            android:id="@+id/action_mainPageFragment_to_chooseLocationFragment"
+            android:id="@+id/action_mainPageFragment_to_chooseLocationFragment3"
             app:destination="@id/chooseLocationFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="longitude"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/chooseLocationFragment"
         android:name="com.example.weatherforecast.view.ChooseLocationFragment"
         android:label="fragment_choose_location"
-        tools:layout="@layout/fragment_choose_location" />
+        tools:layout="@layout/fragment_choose_location" >
+        <action
+            android:id="@+id/action_chooseLocationFragment_to_mainPageFragment2"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
 </navigation>

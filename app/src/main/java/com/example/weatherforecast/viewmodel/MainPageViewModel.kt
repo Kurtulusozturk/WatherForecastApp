@@ -29,9 +29,6 @@ class MainPageViewModel : ViewModel() {
     val dailyWeatherError = MutableLiveData<Boolean>()
 
     val hourlyWeather = MutableLiveData<ArrayList<HourlyWeatherModel>>()
-    val hourlyWeatherError = MutableLiveData<Boolean>()
-
-   //var dataModel = AllValuesDataModel()
 
     fun getCurrentWeather(latitude : Double, longitude : Double){
         var lat = latitude
@@ -42,7 +39,7 @@ class MainPageViewModel : ViewModel() {
         }
         disposable.add(
             currentWeatherService.getData(lat , lon)
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<CurrentWeatherModel>(){
                     override fun onSuccess(t: CurrentWeatherModel) {

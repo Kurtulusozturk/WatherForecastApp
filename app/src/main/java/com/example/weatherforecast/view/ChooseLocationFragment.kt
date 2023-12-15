@@ -5,18 +5,73 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.weatherforecast.R
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherforecast.adapter.CitiesRecyclerViewAdapter
+import com.example.weatherforecast.databinding.FragmentChooseLocationBinding
+import com.example.weatherforecast.model.CitiesModel
+import com.example.weatherforecast.utils.CitySharedPreferences
+import com.example.weatherforecast.viewmodel.ChooseLocationViewModel
 
 
 class ChooseLocationFragment : Fragment() {
+    private lateinit var binding: FragmentChooseLocationBinding
+    private var chooseLocationViewModel: ChooseLocationViewModel = ChooseLocationViewModel()
+    private lateinit var citySharedPreferences : CitySharedPreferences
+    private lateinit var citiesAdapter : CitiesRecyclerViewAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_choose_location, container, false)
+        citySharedPreferences = CitySharedPreferences(requireContext())
+        binding = FragmentChooseLocationBinding.inflate(inflater, container, false)
+        binding.viewModel = chooseLocationViewModel
+        binding.lifecycleOwner = this
+        binding.citiesRecyclerView.layoutManager = LinearLayoutManager(context)
+        citiesAdapter = CitiesRecyclerViewAdapter(arrayListOf(),binding.root)
+        binding.citiesRecyclerView.adapter = citiesAdapter
+        citiesAdapter.updateData(citySharedPreferences.getSelectedCities())
+        chooseLocationViewModel.getCities()
+        observeLiveData()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
     }
     override fun onDestroy() {
         super.onDestroy()
+    }
+    private fun observeLiveData(){
+        chooseLocationViewModel.cities.observe(viewLifecycleOwner){
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, it.map { it.name })
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.citySpinner.adapter = adapter
+            setSpinner(it)
+            }
+    }
+
+    private fun setSpinner(citiesModels: List<CitiesModel>) {
+        var cityName: String? = null
+        var cityLatitude: String? = null
+        var cityLongitude: String? = null
+        binding.citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedCity = citiesModels[position]
+                cityName = selectedCity.name
+                cityLatitude = selectedCity.latitude
+                cityLongitude = selectedCity.longitude
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+        binding.add.setOnClickListener {
+            val newCity = CitiesModel(cityName, cityLatitude, cityLongitude)
+            citySharedPreferences.saveSelectedCity(newCity)
+            citiesAdapter.updateData(citySharedPreferences.getSelectedCities())
+        }
     }
 }
