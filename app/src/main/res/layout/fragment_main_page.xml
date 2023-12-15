@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="com.example.weatherforecast.viewmodel.MainPageViewModel" />
+        <variable
+            name="cityModel"
+            type="com.example.weatherforecast.model.CitiesModel" />
         
     </data>
 
@@ -38,7 +41,8 @@ snowy background #1874cd
                     android:layout_height="30dp"
                     android:background="@drawable/plus"
                     android:layout_marginTop="20dp"
-                    android:layout_marginStart="10dp"/>
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@string/plus_icon" />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
@@ -51,11 +55,12 @@ snowy background #1874cd
                         android:layout_height="100dp"
                         android:layout_marginTop="10dp"
                         android:layout_alignParentEnd="true"
-                        >
+                        tools:ignore="UseCompoundDrawables">
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:background="@drawable/clear"/>
+                            android:background="@drawable/clear"
+                            android:contentDescription="@string/weather_icon" />
                         <TextView
                             android:gravity="center"
                             android:layout_width="match_parent"
@@ -73,7 +78,7 @@ snowy background #1874cd
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:text="İstanbul"
+                            android:text='@{cityModel.name}'
                             android:gravity="center"
                             android:textSize="25sp"
                             android:textColor="#FFFF"
@@ -132,7 +137,7 @@ snowy background #1874cd
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
-                        android:text="Daily"
+                        android:text="@string/daily"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         android:fontFamily="sans-serif-medium"/>
@@ -146,6 +151,7 @@ snowy background #1874cd
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="30dp"
                     android:padding="10dp"
@@ -160,7 +166,7 @@ snowy background #1874cd
                         android:layout_alignParentEnd="true"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
-                        android:text="Hourly"
+                        android:text="@string/hourly"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp" />
 

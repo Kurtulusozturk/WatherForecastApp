@@ -36,20 +36,12 @@ class ChooseLocationFragment : Fragment() {
         observeLiveData()
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        super.onViewCreated(view, savedInstanceState)
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-    }
     private fun observeLiveData(){
-        chooseLocationViewModel.cities.observe(viewLifecycleOwner){
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, it.map { it.name })
+        chooseLocationViewModel.cities.observe(viewLifecycleOwner){ cities ->
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cities.map { it.name })
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.citySpinner.adapter = adapter
-            setSpinner(it)
+            setSpinner(cities)
             }
     }
 

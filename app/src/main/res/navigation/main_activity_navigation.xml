@@ -14,20 +14,8 @@
             android:id="@+id/action_mainPageFragment_to_chooseLocationFragment3"
             app:destination="@id/chooseLocationFragment" />
         <argument
-            android:name="latitude"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-        <argument
-            android:name="longitude"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-        <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:name="selectedCity"
+            app:argType="com.example.weatherforecast.model.CitiesModel" />
     </fragment>
     <fragment
         android:id="@+id/chooseLocationFragment"

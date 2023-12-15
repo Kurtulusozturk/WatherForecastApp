@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherforecast.adapter.DailyRecyclerViewAdapter
 import com.example.weatherforecast.adapter.HourlyRecyclerViewAdapter
 import com.example.weatherforecast.databinding.FragmentMainPageBinding
+import com.example.weatherforecast.model.CitiesModel
+import com.example.weatherforecast.utils.CitySharedPreferences
 import com.example.weatherforecast.viewmodel.MainPageViewModel
 
 class MainPageFragment : Fragment() {
@@ -17,17 +19,38 @@ class MainPageFragment : Fragment() {
     private val dailyAdapter = DailyRecyclerViewAdapter(arrayListOf())
     private val hourlyAdapter = HourlyRecyclerViewAdapter(arrayListOf())
     private lateinit var binding: FragmentMainPageBinding
+    private lateinit var selectedCity : CitiesModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        observeLiveData()
+
+        try{
+            //Remember Value
+            arguments?.let {
+                try {
+                    selectedCity = MainPageFragmentArgs.fromBundle(it).selectedCity
+                    CitySharedPreferences(requireContext()).saveLastSelectedCity(selectedCity)
+                }catch (e:Exception){
+                    selectedCity = CitySharedPreferences(requireContext()).getLastSelectedCity()
+                }
+            }
+            mainPageViewModel.getCurrentWeather(selectedCity.latitude!!.toDouble(),selectedCity.longitude!!.toDouble())
+            mainPageViewModel.getDailyAndHourlyData(selectedCity.latitude!!.toDouble(),selectedCity.longitude!!.toDouble())
+
+        }catch (e : Exception){
+            //Default Value
+            selectedCity = CitiesModel("İstanbul","0.0","0.0")
+            mainPageViewModel.getCurrentWeather(0.0,0.0)
+            mainPageViewModel.getDailyAndHourlyData(0.0,0.0)
+        }
+
         binding = FragmentMainPageBinding.inflate(inflater, container, false)
         binding.viewModel = mainPageViewModel
         binding.lifecycleOwner = this
-        mainPageViewModel.getCurrentWeather(0.0,0.0)
-        mainPageViewModel.getDailyAndHourlyData(0.0,0.0)
-        observeLiveData()
+        binding.cityModel = selectedCity
         return binding.root
     }
 
@@ -43,11 +66,6 @@ class MainPageFragment : Fragment() {
         }
     }
     private fun observeLiveData(){
-        mainPageViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
-            currentWeather?.let {
-                println(it)
-            }
-        }
         mainPageViewModel.dailyAndHourlyAPIList.observe(viewLifecycleOwner){dailyAndHourlyAPIList ->
             dailyAndHourlyAPIList?.let {
                 mainPageViewModel.getDailyWeather()

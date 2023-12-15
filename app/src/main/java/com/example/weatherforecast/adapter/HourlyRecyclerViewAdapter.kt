@@ -9,11 +9,9 @@ import com.example.weatherforecast.databinding.HourlyWeatherRecyclerViewBinding
 import com.example.weatherforecast.model.hourlymodel.HourlyWeatherModel
 
 
-class HourlyRecyclerViewAdapter(val hourlyList : ArrayList<HourlyWeatherModel>):RecyclerView.Adapter<HourlyRecyclerViewAdapter.HourlyViewHolder>() {
+class HourlyRecyclerViewAdapter(private val hourlyList : ArrayList<HourlyWeatherModel>):RecyclerView.Adapter<HourlyRecyclerViewAdapter.HourlyViewHolder>() {
 
-    class HourlyViewHolder(val view : HourlyWeatherRecyclerViewBinding) : RecyclerView.ViewHolder(view.root){
-
-    }
+    class HourlyViewHolder(val view : HourlyWeatherRecyclerViewBinding) : RecyclerView.ViewHolder(view.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
         val inflater = LayoutInflater.from(parent.context)

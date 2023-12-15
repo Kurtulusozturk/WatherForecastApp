@@ -8,12 +8,10 @@ import com.example.weatherforecast.R
 import com.example.weatherforecast.databinding.DailyWeatherRecyclerViewBinding
 import com.example.weatherforecast.model.dailymodel.DailyWeatherModel
 
-class DailyRecyclerViewAdapter(val dailyList : ArrayList<DailyWeatherModel>)
+class DailyRecyclerViewAdapter(private val dailyList : ArrayList<DailyWeatherModel>)
     :RecyclerView.Adapter<DailyRecyclerViewAdapter.DailyViewHolder>(){
 
-    class DailyViewHolder(val view : DailyWeatherRecyclerViewBinding) : RecyclerView.ViewHolder(view.root){
-
-    }
+    class DailyViewHolder(val view : DailyWeatherRecyclerViewBinding) : RecyclerView.ViewHolder(view.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyViewHolder {
         val inflater = LayoutInflater.from(parent.context)

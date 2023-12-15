@@ -12,11 +12,11 @@ class CitySharedPreferences(context: Context) {
     private val gson = Gson()
 
     fun saveSelectedCity(newCity: CitiesModel) {
-        // Önceden seçilmiş şehir listesini al
+        // List of selected cities
         val existingCityList = getSelectedCities().toMutableList()
 
         if (!existingCityList.contains(newCity)){
-            // Yeni seçilen şehiri listeye ekle
+            // New city add list
             existingCityList.add(newCity)
         }else{
             println("zaten var")
@@ -33,23 +33,30 @@ class CitySharedPreferences(context: Context) {
         return if (json != null) {
             gson.fromJson(json, object : TypeToken<ArrayList<CitiesModel>>() {}.type)
         } else {
-            arrayListOf(CitiesModel())
+            arrayListOf(CitiesModel("İstanbul","41.0053","28.9770"))
         }
     }
 
     fun removeSelectedCity(cityName: String) {
-        // Önceden seçilmiş şehir listesini al
+        // List of selected cities
         val existingCityList = getSelectedCities().toMutableList()
 
-        // Verilen isimdeki şehiri listeden sil
+        // Delete selected city
         existingCityList.removeAll { it.name == cityName }
 
-        // Şehir listesini JSON formatına çevirerek SharedPreferences'a kaydet
         val json = gson.toJson(existingCityList)
         sharedPreferences.edit().putString("selectedCities", json).apply()
     }
-    fun clearSelectedCities() {
-        // SharedPreferences'tan şehir listesini temizle
-        sharedPreferences.edit().remove("selectedCities").apply()
+
+    fun saveLastSelectedCity(city: CitiesModel) {
+        val gson = Gson()
+        val json = gson.toJson(city)
+        sharedPreferences.edit().putString("lastSelectedCity", json).apply()
+    }
+
+    fun getLastSelectedCity(): CitiesModel {
+        val gson = Gson()
+        val json = sharedPreferences.getString("lastSelectedCity", null)
+        return gson.fromJson(json, CitiesModel::class.java)
     }
 }

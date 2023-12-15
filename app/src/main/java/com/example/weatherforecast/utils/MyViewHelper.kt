@@ -24,5 +24,8 @@ object MyViewHelper {
         val dateFormat = SimpleDateFormat(format, Locale.getDefault())
         return dateFormat.format(calendar.time)
     }
+    fun setImageBackground(){
+
+    }
 
 }

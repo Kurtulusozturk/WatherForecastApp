@@ -1,12 +1,8 @@
 package com.example.weatherforecast.service.citiesservice
 
 import com.example.weatherforecast.model.CitiesModel
-import com.example.weatherforecast.service.dailyweatherservice.DailyWeatherAPI
 import com.example.weatherforecast.utils.RetrofitBaseClassWeatherService
 import io.reactivex.Single
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
 class CitiesService {
     //BASE_URL -> https://gist.githubusercontent.com/

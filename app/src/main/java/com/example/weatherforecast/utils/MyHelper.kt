@@ -10,7 +10,7 @@ import kotlin.math.ceil
 import kotlin.math.floor
 class MyHelper {
 
-    fun kelvinToCelcius(kelvin: Double?): Int {
+    private fun kelvinToCelcius(kelvin: Double?): Int {
         val celciusDouble = kelvin?.minus(273.15)
         val decimalPart = celciusDouble?.minus(celciusDouble.toInt())
         if (decimalPart!! > 0.5) {
@@ -34,7 +34,7 @@ class MyHelper {
         if (dailyOrHourly == "daily"){
             groupedByDate.forEach { (date, group) ->
                 if (date != getCurrentDateInFormat("yyyy-MM-dd")){
-                    val (maxTemp, minTemp) = group.map { it.main!!.temp }.let {
+                    val (maxTemp, minTemp) = group.map { it.main!!.temp }.let { it ->
                         if (it.isEmpty()) null to null
                         else it.maxByOrNull { it!! } to it.minByOrNull { it!! }
                     }
@@ -68,7 +68,7 @@ class MyHelper {
         return null
     }
 
-    fun getCurrentDateInFormat(format: String): String {
+    private fun getCurrentDateInFormat(format: String): String {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat(format, Locale.getDefault())
         return dateFormat.format(calendar.time)
