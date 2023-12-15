@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherforecast.R
 import com.example.weatherforecast.databinding.DailyWeatherRecyclerViewBinding
 import com.example.weatherforecast.model.dailymodel.DailyWeatherModel
+import com.example.weatherforecast.utils.MyHelper
 
-class DailyRecyclerViewAdapter(private val dailyList : ArrayList<DailyWeatherModel>)
-    :RecyclerView.Adapter<DailyRecyclerViewAdapter.DailyViewHolder>(){
+class DailyRecyclerViewAdapter(private val dailyList : ArrayList<DailyWeatherModel>) :RecyclerView.Adapter<DailyRecyclerViewAdapter.DailyViewHolder>(){
 
     class DailyViewHolder(val view : DailyWeatherRecyclerViewBinding) : RecyclerView.ViewHolder(view.root)
 
@@ -25,6 +25,7 @@ class DailyRecyclerViewAdapter(private val dailyList : ArrayList<DailyWeatherMod
 
     override fun onBindViewHolder(holder: DailyViewHolder, position: Int) {
         holder.view.dailyWeather = dailyList[position]
+        MyHelper().setImageBackground(holder.view.dailyWeatherIcon,dailyList[position].weather)
     }
 
     fun updateData(newDailyList : ArrayList<DailyWeatherModel>){

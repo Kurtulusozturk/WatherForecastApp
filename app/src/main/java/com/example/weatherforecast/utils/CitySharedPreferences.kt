@@ -7,23 +7,16 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class CitySharedPreferences(context: Context) {
-    private val sharedPreferences: SharedPreferences =
-        context.getSharedPreferences("CityPreferences", Context.MODE_PRIVATE)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("CityPreferences", Context.MODE_PRIVATE)
     private val gson = Gson()
 
     fun saveSelectedCity(newCity: CitiesModel) {
         // List of selected cities
         val existingCityList = getSelectedCities().toMutableList()
-
         if (!existingCityList.contains(newCity)){
             // New city add list
             existingCityList.add(newCity)
-        }else{
-            println("zaten var")
         }
-
-
-        // Şehir listesini JSON formatına çevirerek SharedPreferences'a kaydet
         val json = gson.toJson(existingCityList)
         sharedPreferences.edit().putString("selectedCities", json).apply()
     }
@@ -40,10 +33,8 @@ class CitySharedPreferences(context: Context) {
     fun removeSelectedCity(cityName: String) {
         // List of selected cities
         val existingCityList = getSelectedCities().toMutableList()
-
         // Delete selected city
         existingCityList.removeAll { it.name == cityName }
-
         val json = gson.toJson(existingCityList)
         sharedPreferences.edit().putString("selectedCities", json).apply()
     }

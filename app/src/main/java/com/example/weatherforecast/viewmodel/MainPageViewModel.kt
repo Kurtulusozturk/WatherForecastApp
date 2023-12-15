@@ -48,7 +48,6 @@ class MainPageViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        println(e)
                         currentWeatherError.value = true
                     }
 
@@ -91,57 +90,4 @@ class MainPageViewModel : ViewModel() {
             hourlyWeather.value = MyHelper().getDatasForDailyOrHourly(it, "hourly") as ArrayList<HourlyWeatherModel>
         }
     }
-    /*
-        fun getDailyWeather(latitude : Double, longitude : Double){
-        var lat = latitude
-        var lon = longitude
-        if (lat.equals(0.0) || lon.equals(0.0)){
-            lat = 41.00
-            lon = 27.12
-        }
-        disposable.add(
-        dailyWeatherService.getData(lat , lon)
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableSingleObserver<DailyAndHourlyResponseModel>(){
-                override fun onSuccess(t: DailyAndHourlyResponseModel) {
-                    dailyWeather.value = t.dailyAndHourlyAPIList
-                    dailyWeatherError.value = false
-                }
-
-                override fun onError(e: Throwable) {
-                    println(e)
-                    dailyWeatherError.value = true
-                }
-
-            })
-        )
-    }
-    fun getHourlyWeather(latitude : Double, longitude : Double){
-        var lat = latitude
-        var lon = longitude
-        if (lat.equals(0.0) || lon.equals(0.0)){
-            lat = 41.00
-            lon = 27.12
-        }
-        disposable.add(
-            hourlyWeatherService.getData(lat , lon)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(
-                    object : DisposableSingleObserver<HourlyResponseModel>(){
-                    override fun onSuccess(t: HourlyResponseModel) {
-                        hourlyWeather.value = t.hourlyWeatherModel
-                        hourlyWeatherError.value = false
-                    }
-
-                    override fun onError(e: Throwable) {
-                        dailyWeatherError.value = true
-                    }
-
-                })
-        )
-    }
-     */
-
 }

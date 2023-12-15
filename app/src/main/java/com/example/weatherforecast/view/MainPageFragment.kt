@@ -12,6 +12,7 @@ import com.example.weatherforecast.adapter.HourlyRecyclerViewAdapter
 import com.example.weatherforecast.databinding.FragmentMainPageBinding
 import com.example.weatherforecast.model.CitiesModel
 import com.example.weatherforecast.utils.CitySharedPreferences
+import com.example.weatherforecast.utils.MyHelper
 import com.example.weatherforecast.viewmodel.MainPageViewModel
 
 class MainPageFragment : Fragment() {
@@ -66,6 +67,11 @@ class MainPageFragment : Fragment() {
         }
     }
     private fun observeLiveData(){
+        mainPageViewModel.currentWeather.observe(viewLifecycleOwner){currentWeather ->
+            currentWeather?.let {
+                MyHelper().setImageBackground(binding.currenWeatherIcon , it.weather[0].main)
+            }
+        }
         mainPageViewModel.dailyAndHourlyAPIList.observe(viewLifecycleOwner){dailyAndHourlyAPIList ->
             dailyAndHourlyAPIList?.let {
                 mainPageViewModel.getDailyWeather()

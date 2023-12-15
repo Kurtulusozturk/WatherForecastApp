@@ -24,14 +24,17 @@ class ChooseLocationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        citySharedPreferences = CitySharedPreferences(requireContext())
         binding = FragmentChooseLocationBinding.inflate(inflater, container, false)
         binding.viewModel = chooseLocationViewModel
         binding.lifecycleOwner = this
         binding.citiesRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        citySharedPreferences = CitySharedPreferences(requireContext())
+
         citiesAdapter = CitiesRecyclerViewAdapter(arrayListOf(),binding.root)
         binding.citiesRecyclerView.adapter = citiesAdapter
         citiesAdapter.updateData(citySharedPreferences.getSelectedCities())
+
         chooseLocationViewModel.getCities()
         observeLiveData()
         return binding.root

@@ -57,6 +57,7 @@ snowy background #1874cd
                         android:layout_alignParentEnd="true"
                         tools:ignore="UseCompoundDrawables">
                         <ImageView
+                            android:id="@+id/currenWeatherIcon"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/clear"
@@ -65,7 +66,7 @@ snowy background #1874cd
                             android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:text="@{MyViewHelper.INSTANCE.kelvinToCelcius(viewModel.currentWeather.main.temp)}"
+                            android:text="@{MyViewHelper.INSTANCE.kelvinToCelsius(viewModel.currentWeather.main.temp)}"
                             android:textSize="50sp"
                             android:textColor="#FFFF"
                             android:fontFamily="sans-serif-medium"/>
@@ -96,7 +97,7 @@ snowy background #1874cd
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:text='@{ "RealFeel: " + MyViewHelper.INSTANCE.kelvinToCelcius(viewModel.currentWeather.main.feelsLike)}'
+                            android:text='@{ "RealFeel: " + MyViewHelper.INSTANCE.kelvinToCelsius(viewModel.currentWeather.main.feelsLike)}'
                             android:gravity="center"
                             android:textSize="15sp"
                             android:textColor="#FFFF"

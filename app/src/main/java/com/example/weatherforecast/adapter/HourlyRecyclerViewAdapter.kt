@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherforecast.R
 import com.example.weatherforecast.databinding.HourlyWeatherRecyclerViewBinding
 import com.example.weatherforecast.model.hourlymodel.HourlyWeatherModel
+import com.example.weatherforecast.utils.MyHelper
 
 
 class HourlyRecyclerViewAdapter(private val hourlyList : ArrayList<HourlyWeatherModel>):RecyclerView.Adapter<HourlyRecyclerViewAdapter.HourlyViewHolder>() {
@@ -25,6 +26,7 @@ class HourlyRecyclerViewAdapter(private val hourlyList : ArrayList<HourlyWeather
 
     override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
         holder.view.hourlyWeather = hourlyList[position]
+        MyHelper().setImageBackground(holder.view.hourlyWeatherIcon,hourlyList[position].weather)
     }
 
     fun updateData(newHourlyList : ArrayList<HourlyWeatherModel>){
