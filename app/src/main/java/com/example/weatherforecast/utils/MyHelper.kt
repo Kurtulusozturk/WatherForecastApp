@@ -81,6 +81,7 @@ class MyHelper {
             "clouds" -> R.drawable.cloud
             "clear"  -> R.drawable.clear
             "snow"  -> R.drawable.snowy
+            "asc"  -> R.drawable.snowy
             "rain"  -> R.drawable.rain
             else     -> R.drawable.cloud
         }
