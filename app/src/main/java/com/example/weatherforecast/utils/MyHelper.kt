@@ -77,7 +77,7 @@ class MyHelper {
     }
 
     fun setImageBackground(imageView: ImageView, weather : String?){
-        val drawableResId = when(weather?.toLowerCase()){
+        val drawableResId = when(weather?.lowercase()){
             "clouds" -> R.drawable.cloud
             "clear"  -> R.drawable.clear
             "snow"  -> R.drawable.snowy
@@ -87,7 +87,7 @@ class MyHelper {
         imageView.setBackgroundResource(drawableResId)
     }
 
-    fun formatDate(dateString: String?): String {
+    private fun formatDate(dateString: String?): String {
 
         if (dateString!!.contains(":")) {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")

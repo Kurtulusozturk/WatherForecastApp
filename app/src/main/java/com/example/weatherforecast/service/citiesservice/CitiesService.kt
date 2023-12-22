@@ -10,7 +10,7 @@ class CitiesService {
 
     private val BASE_URL = "https://gist.githubusercontent.com/"
     fun getData() : Single<List<CitiesModel>> {
-        val api = RetrofitBaseClassWeatherService().retrofit<CitiesAPI>(BASE_URL)
+        val api = RetrofitBaseClassWeatherService.getService<CitiesAPI>(BASE_URL)
         return api.getCities()
     }
 }
