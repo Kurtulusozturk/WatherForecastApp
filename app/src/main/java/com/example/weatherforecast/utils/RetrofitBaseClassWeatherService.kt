@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitBaseClassWeatherService {
+class RetrofitBaseClassWeatherService {
     var retrofitInstance: Retrofit? = null
 
     inline fun <reified T> getService(BASE_URL: String): T {

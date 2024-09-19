@@ -8,7 +8,7 @@ class DailyWeatherService {
     private val BASE_URL = "https://api.openweathermap.org/"
 
     fun getData(lat : Double , lon : Double) : Single<DailyAndHourlyResponseModel> {
-        val api = RetrofitBaseClassWeatherService.getService<DailyWeatherAPI>(BASE_URL)
+        val api = RetrofitBaseClassWeatherService().getService<DailyWeatherAPI>(BASE_URL)
         return api.getDailyWeather(lat , lon)
     }
 
